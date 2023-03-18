@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "247762040375",
+    "firebase_url": "https://chat-89cd5-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "chat-89cd5",
+    "storage_bucket": "chat-89cd5.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:247762040375:android:78e7fbb25bc27dc38471b2",
+        "android_client_info": {
+          "package_name": "com.kharin.chat"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "247762040375-nk2ma974bto05pdk4d4jk7jsm8g5javg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCGorf-Y_jm0pBKdbozfCIacyXrP4IrIEU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "247762040375-nk2ma974bto05pdk4d4jk7jsm8g5javg.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
