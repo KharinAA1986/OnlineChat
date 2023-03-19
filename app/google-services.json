@@ -15,7 +15,15 @@
       },
       "oauth_client": [
         {
-          "client_id": "247762040375-nk2ma974bto05pdk4d4jk7jsm8g5javg.apps.googleusercontent.com",
+          "client_id": "247762040375-vu00da07f2mkc8niep3b7mrm2jfh4ouq.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.kharin.chat",
+            "certificate_hash": "09c72fa9e87a6abd5b940a50263e7352839a2f78"
+          }
+        },
+        {
+          "client_id": "247762040375-4lpa3r110vg0fjm61hva7nji67brkgk1.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
@@ -28,7 +36,7 @@
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "247762040375-nk2ma974bto05pdk4d4jk7jsm8g5javg.apps.googleusercontent.com",
+              "client_id": "247762040375-4lpa3r110vg0fjm61hva7nji67brkgk1.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
