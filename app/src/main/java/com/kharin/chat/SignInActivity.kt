@@ -1,5 +1,6 @@
 package com.kharin.chat
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -39,7 +40,9 @@ class SignInActivity : AppCompatActivity() {
         binding.bSignin.setOnClickListener {
             signInWithGoogle()
         }
+        checkAuthState()
     }
+    @SuppressLint("SuspiciousIndentation")
     private fun getClient(): GoogleSignInClient {
     val gso = GoogleSignInOptions
         .Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -53,10 +56,14 @@ class SignInActivity : AppCompatActivity() {
         val signInClient = getClient()
         launcher.launch(signInClient.signInIntent)
     }
-
     private fun firebaseAuthWithGoogle(idToken: String){
         val credential = GoogleAuthProvider.getCredential(idToken,null)
-        auth.signInWithCredential(credential).addOnCompleteListener {  }
+        auth.signInWithCredential(credential).addOnCompleteListener {
+            if (it.isSuccessful) checkAuthState()
+        }
+    }
+    private fun checkAuthState(){
+        if (auth.currentUser!=null) startActivity(Intent(this, MainActivity::class.java))
     }
 }
 
