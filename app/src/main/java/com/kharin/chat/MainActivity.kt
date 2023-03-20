@@ -53,7 +53,7 @@ class MainActivity : AppCompatActivity() {
             override fun onDataChange(snapshot: DataSnapshot) {
                 binding.apply {
                     textView.append("\n")
-                    textView.append("Alex: ${snapshot.value.toString()}")
+                    textView.append("${auth.currentUser?.displayName}: ${snapshot.value.toString()}")
                 }
             }
             override fun onCancelled(error: DatabaseError) {
