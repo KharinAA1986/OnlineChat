@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.DataSnapshot
@@ -19,6 +20,7 @@ import com.squareup.picasso.Picasso
 class MainActivity : AppCompatActivity() {
     lateinit var binding: ActivityMainBinding
     lateinit var auth: FirebaseAuth
+    lateinit var adapter: MessageAdapter
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -29,10 +31,12 @@ class MainActivity : AppCompatActivity() {
         val myRef = database.getReference("message")
         binding.apply {
                 bSend.setOnClickListener {
-                myRef.setValue(etMessage.text.toString())
+                myRef.child(myRef.push().key?:"error") // child - new /path in the database
+                    .setValue(UserMessage(auth.currentUser?.displayName, binding.etMessage.text.toString()))
                 etMessage.text.clear()
             }
         }
+        initRCView()
         updateChat(myRef)
     }
 
@@ -48,12 +52,22 @@ class MainActivity : AppCompatActivity() {
         }
         return super.onOptionsItemSelected(item)
     }
+   private fun initRCView() = with(binding){
+        adapter = MessageAdapter()
+        rvChat.layoutManager = LinearLayoutManager(this@MainActivity)
+        rvChat.adapter = adapter
+   }
     private fun updateChat(dRef: DatabaseReference) {
         dRef.addValueEventListener(object : ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
                 binding.apply {
-                    textView.append("\n")
-                    textView.append("${auth.currentUser?.displayName}: ${snapshot.value.toString()}")
+                    val list = ArrayList<UserMessage>()
+                    for(s in snapshot.children){
+                        val userMessage = s.getValue(UserMessage::class.java)
+                        if(userMessage!=null) list.add(userMessage)
+                    }
+                    adapter.submitList(list)
+                    rvChat.smoothScrollToPosition(adapter.itemCount)
                 }
             }
             override fun onCancelled(error: DatabaseError) {
